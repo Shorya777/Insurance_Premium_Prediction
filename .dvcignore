@@ -1,0 +1,11 @@
+# Add patterns of files dvc should ignore, which could improve
+# the performance. Learn more at
+# https://dvc.org/doc/user-guide/dvcignore
+logs
+logger_config.py
+setup.py
+rough
+Shorya.egg-info
+**/*.swp
+**/*.ipynb_checkpoints
+__pycache__

@@ -1,0 +1,9 @@
+logs
+logger_config.py
+setup.py
+rough
+Shorya.egg-info
+**/*.swp
+**/*.ipynb_checkpoints
+__pycache__
+artifacts
