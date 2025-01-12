@@ -22,7 +22,7 @@ class ModelTrainingPipeline:
               # "Gradient_Boosting": GradientBoostingRegressor()}
                  }
 
-        param_grid = {"Linear_Regression": {"fit_intercept": [True, False]},
+        param_grids = {"Linear_Regression": {"fit_intercept": [True, False]},
                       # "Random_Forest": {"n_estimators": [100, 200],
                       #                   "max_depth": [100, 200],
                       #                   "min_samples_split": [2, 5]},
@@ -30,7 +30,7 @@ class ModelTrainingPipeline:
                       #                       "learning_rate": [0.1, 0.01],
                       #                       "max_depth": [3, 5]}}
                      }                
-        best_models = model_training.train_model(models, param_grid)
+        best_models = model_training.train_model(models, param_grids)
         print(best_models)
 
 

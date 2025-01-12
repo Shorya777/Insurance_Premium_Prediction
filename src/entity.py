@@ -17,3 +17,4 @@ class DataPreprocessingConfig:
 class ModelTrainingConfig:
     source: Path
     model_save_dir : Path
+    remote_tracking_url : Path

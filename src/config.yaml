@@ -11,7 +11,6 @@ data_preprocessing:
   source : *unzip_dir
 
 model_training:
-    source: artifacts/preprocessed_data/train_cleaned.csv
-    model_save_dir: artifacts/models
-    
-    
+  source: artifacts/preprocessed_data/train_cleaned.csv
+  model_save_dir: artifacts/models
+  remote_tracking_url : https://dagshub.com/shoryasinghal100/Insurance_Premium_Prediction.mlflow 

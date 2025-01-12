@@ -38,5 +38,6 @@ class ConfigurationManager:
 
         return ModelTrainingConfig(
             source  = config.source,
-            model_save_dir = config.model_save_dir
+            model_save_dir = config.model_save_dir,
+            remote_tracking_url = config.remote_tracking_url
         )

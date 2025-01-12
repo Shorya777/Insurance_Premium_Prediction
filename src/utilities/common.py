@@ -10,7 +10,6 @@ import gc
 import joblib 
 import numpy as np
 from itertools import product
-import os
 
 logger = get_logger(__name__)
 
@@ -26,7 +25,6 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
     except Exception as e:
         raise e
 
-
 def custom_grid_search(model_name, model, save_dir, param_grid, X, y, cv=2, scoring='mean_squared_error'):
     gc.collect()
     if cv < 2:
@@ -38,13 +36,10 @@ def custom_grid_search(model_name, model, save_dir, param_grid, X, y, cv=2, scor
     param_combinations = list(product(*param_grid.values()))
     param_keys = list(param_grid.keys())
 
-    i=1
-    for combination in param_combinations:
-        print(f"Training model {i}/{len(param_combinations)}")
-        i+=1
-
+    for i, combination in enumerate(param_combinations, 1):
         params = dict(zip(param_keys, combination))
         model.set_params(**params)
+        print(f"Training model {i}/{len(param_combinations)} with params: {params}")
 
         np.random.seed(42)
         indices = np.arange(len(X))
@@ -72,29 +67,29 @@ def custom_grid_search(model_name, model, save_dir, param_grid, X, y, cv=2, scor
 
             cv_scores.append(score)
 
-        mean_cv_score = np.mean(cv_scores)
+            mean_cv_score = np.mean(cv_scores)
 
-        if mean_cv_score < best_score:
-            best_score = mean_cv_score
-            best_params = params
+            if mean_cv_score < best_score:
+                best_score = mean_cv_score
+                best_params = params
 
-            os.makedirs(save_dir, exist_ok = True)
-            model_save_path = os.path.join(save_dir, model_name) 
-            os.makedirs(model_save_path, exist_ok = True)
-            print(f"saving {model_name} to {model_save_path}")
-            model_path = os.path.join(model_save_path, f"{best_score}_{model_name}.joblib")
-            joblib.dump(model, model_path)
-            print("model saved")
-            
+                os.makedirs(save_dir, exist_ok=True)
+                model_save_path = os.path.join(save_dir, model_name)
+                os.makedirs(model_save_path, exist_ok=True)
+                print(f"saving {model_name} to {model_save_path}")
+                model_path = os.path.join(model_save_path, f"{best_score}_{model_name}.joblib")
+                joblib.dump(model, model_path)
+                print("model saved")
+
     return best_params, best_score
 
-def custom_grid_search_models(models, save_dir, param_grid, X_train, y_train, cv=2):
+def custom_grid_search_models(models, save_dir, param_grid, X_train, y_train, mlflow_url, cv=2):
     best_models = {}
 
     for model_name, model in models.items():
         print(f"Training {model_name}...")
 
-        best_params, best_score = custom_grid_search(model_name, model, save_dir, param_grid[model_name], X_train, y_train, cv=cv)
+        best_params, best_score = custom_grid_search(model_name, model, save_dir, param_grid[model_name], X_train, y_train, mlflow_url,  cv=cv)
 
         print(f"Best Parameters for {model_name}: {best_params}")
         print(f"Best Score (MSE): {best_score}")
