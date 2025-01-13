@@ -5,7 +5,6 @@ from ensure import ensure_annotations
 from logger_config import get_logger
 import yaml
 import pandas as pd
-import numpy as pd
 import gc
 import joblib 
 import numpy as np

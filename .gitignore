@@ -6,3 +6,4 @@ Shorya.egg-info
 **/*.ipynb_checkpoints
 __pycache__
 artifacts
+main.py
