@@ -7,6 +7,13 @@ Hello everyone! This project utilizes Kaggle's Insurance Premium dataset to trai
 
 ### Instructions for Running Project
 - Fork this repository
+- Set up a Python or Conda environment to prevent project operations from affecting your local system.
+- Install all the project's dependencies specified in **requirements.txt**
+  ```
+  pip install -r requirements.txt
+  ```
+  If you use any version of the library other than the one specified in **requirements.txt**, you may encounter errors.
+
 - Open the project's root directory in your terminal and type the command
   
   ```
@@ -14,7 +21,12 @@ Hello everyone! This project utilizes Kaggle's Insurance Premium dataset to trai
   ```
   
   This adds the project's root directory to the  Python path variable so you can access the root anywhere in the project.
-
+  
+- To track the stages present in the project's pipeline using **DVC**, run the following command
+  ```
+  dvc repro
+  ```
+   
 I hope you all enjoy this project, which was created solely for learning purposes and as a step towards becoming a great Software Developer.
 Thank you all for taking the time to look at this project.
 
