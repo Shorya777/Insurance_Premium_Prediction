@@ -67,19 +67,19 @@ def custom_grid_search(model_name, model, save_dir, param_grid, X, y, cv=2, scor
 
             cv_scores.append(score)
 
-            mean_cv_score = np.mean(cv_scores)
+        mean_cv_score = np.mean(cv_scores)
 
-            if mean_cv_score < best_score:
-                best_score = mean_cv_score
-                best_params = params
+        if mean_cv_score < best_score:
+            best_score = mean_cv_score
+            best_params = params
 
-                os.makedirs(save_dir, exist_ok=True)
-                model_save_path = os.path.join(save_dir, model_name)
-                os.makedirs(model_save_path, exist_ok=True)
-                print(f"saving {model_name} to {model_save_path}")
-                model_path = os.path.join(model_save_path, f"{best_score}_{model_name}.joblib")
-                joblib.dump(model, model_path)
-                print("model saved")
+            os.makedirs(save_dir, exist_ok=True)
+            model_save_path = os.path.join(save_dir, model_name)
+            os.makedirs(model_save_path, exist_ok=True)
+            print(f"saving {model_name} to {model_save_path}")
+            model_path = os.path.join(model_save_path, f"{best_score}_{model_name}.joblib")
+            joblib.dump(model, model_path)
+            print("model saved")
 
     return best_params, best_score
 
